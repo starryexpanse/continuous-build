@@ -42,13 +42,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Generating Visual Studio project files'
+                echo 'Generating Visual Studio project files.'
                 bat 'UE4\\StarryExpanse\\genproj.bat'
 
-                echo 'Building Game DLL'
+                echo 'Building Game modules.'
                 bat 'UE4\\StarryExpanse\\build-modules.bat'
 
-                echo 'Building Game'
+                echo 'Building Game.'
                 bat 'UE4\\StarryExpanse\\build-game.bat'
             }
         }
@@ -67,7 +67,7 @@ pipeline {
     }
     post {
         always {
-            echo 'One way or another, I have finished'
+            echo 'One way or another, I have finished.'
         }
         success {
             echo 'I succeeded!'
