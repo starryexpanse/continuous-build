@@ -71,7 +71,7 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            slackSend channel: "#build", color: "#00AA00", message: "Build FAILED: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            slackSend channel: "#build", color: "#00AA00", message: "Build succeeded: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
         }
         unstable {
             echo 'I am unstable :/'
