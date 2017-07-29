@@ -12,6 +12,7 @@ a Groovy pipeline using the declarative syntax.
 3. Unreal Engine.
 4. [Jenkins](https://jenkins.io).
    * The [Slack Plugin](https://wiki.jenkins.io/display/JENKINS/Slack+Plugin).
+   * The [Lockable Resources plugin](https://wiki.jenkins.io/display/JENKINS/Lockable+Resources+Plugin).
 5. Visual Studio.
 
 # Configuration
