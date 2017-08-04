@@ -62,8 +62,8 @@ pipeline {
         stage('Archive') {
             steps {
                 // 7z command-line args at: https://www.dotnetperls.com/7-zip-examples
-                bat '"%ProgramW6432%/7-Zip/7z.exe" a -tzip -r "%WORKSPACE%/Build/Development/Win64/StarryExpanse.zip" "%WORKSPACE%/Build/Development/Win64/WindowsNoEditor"'
-                archiveArtifacts artifacts: 'Build/Development/Win64/StarryExpanse.zip', onlyIfSuccessful: true
+                bat '"%ProgramW6432%/7-Zip/7z.exe" a -tzip -r "%WORKSPACE%/Build/Development/Win64/StarryExpanse_%BUILD_NUMBER%.zip" "%WORKSPACE%/Build/Development/Win64/WindowsNoEditor"'
+                archiveArtifacts artifacts: "Build/Development/Win64/StarryExpanse_${env.BUILD_NUMBER}.zip", onlyIfSuccessful: true
             }
         }
     }
