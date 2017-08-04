@@ -25,8 +25,10 @@ pipeline {
                 checkout poll: true, scm: [$class: 'GitSCM',
                     branches: [[name: '*/master']],
                     doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'RelativeTargetDirectory',
-                    relativeTargetDir: 'UE4/StarryExpanse/Source']],
+                    extensions: [
+                        [$class: 'CleanBeforeCheckout'],
+                        [$class: 'RelativeTargetDirectory', relativeTargetDir: 'UE4/StarryExpanse/Source']
+                    ],
                     submoduleCfg: [],
                     userRemoteConfigs: [[
                         url: 'https://github.com/starryexpanse/StarryExpanse.git']]
