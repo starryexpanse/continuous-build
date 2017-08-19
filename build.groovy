@@ -39,18 +39,13 @@ pipeline {
                     }
                 }
                 echo 'Cleaning prior build.'
-                bat 'UE4\\StarryExpanse\\build-clean.bat'
+                bat 'python UE4\\StarryExpanse\\build.py clean'
             }
         }
         stage('Build') {
             steps {
                 lock('UE4Build') {
-                    echo 'Generating Visual Studio project files.'
-                    bat 'UE4\\StarryExpanse\\genproj.bat'
-                    echo 'Building Game modules.'
-                    bat 'UE4\\StarryExpanse\\build-modules.bat'
-                    echo 'Building Game.'
-                    bat 'UE4\\StarryExpanse\\build-game.bat'
+                    bat 'python UE4\\StarryExpanse\\build.py full'
                 }
             }
         }

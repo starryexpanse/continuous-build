@@ -14,6 +14,11 @@ a Groovy pipeline using the declarative syntax.
    * The [Slack Plugin](https://wiki.jenkins.io/display/JENKINS/Slack+Plugin).
    * The [Lockable Resources plugin](https://wiki.jenkins.io/display/JENKINS/Lockable+Resources+Plugin).
 5. Visual Studio.
+6. Python 3.x.
+
+Note: Python must be installed for all users and it's path must be added to the
+system's Path environment as Jenkins runs as a service. This is done by customizing
+the Python installation.
 
 # Configuration
 
