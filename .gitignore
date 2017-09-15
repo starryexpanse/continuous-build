@@ -1,0 +1,6 @@
+.DS_Store
+twistd.log
+twistd.log.1
+twistd.pid
+state.sqlite
+http.log
