@@ -59,7 +59,10 @@ class VirtualEnv(object):
   @staticmethod
   def Create(venv_dir):
     Command.Run(['python3', '-m', 'venv', venv_dir])
-    cmd = ['source', os.path.join(venv_dir, 'bin', 'activate')]
+    if platform.system() == 'Windows':
+      cmd = [os.path.join(venv_dir, 'Scripts', 'activate')]
+    else:
+      cmd = ['source', os.path.join(venv_dir, 'bin', 'activate')]
     print('From your shell run this command:')
     print()
     Command.Print([' ', ' '] + cmd)
