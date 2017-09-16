@@ -148,6 +148,17 @@ class BuildbotManager(object):
 
   @staticmethod
   def StartMaster(options):
+    if platform.system() == 'Darwin':
+      bad_proxy = False
+      try:
+        if os.environ['no_proxy'] != '*':
+          bad_proxy = True
+      except KeyError:
+        bad_proxy = True
+      if bad_proxy:
+        # Workaround a macOS Python bug
+        # See https://github.com/buildbot/buildbot/issues/3605
+        os.environ['no_proxy'] = '*'
     if not BuildbotManager.HasSecrets():
       print('Missing "secrets" directory', file=sys.stderr)
       sys.exit(1)
