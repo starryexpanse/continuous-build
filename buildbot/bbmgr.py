@@ -68,8 +68,8 @@ class VirtualEnv(object):
 class Options(object):
   def __init__(self):
     self.command = None
-    self.venv_dir = 'testvenv'
-    self.worker_dir = 'testworker'
+    self.venv_dir = 'buildbotvenv'
+    self.worker_dir = 'worker'
     self.master_dir = 'master'
     self.master_hostname = None
     self.worker_username = None
