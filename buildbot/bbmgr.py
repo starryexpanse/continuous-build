@@ -193,6 +193,8 @@ class BuildbotManager(object):
       os.chdir(options.venv_dir)
       Command.Run(['pip', 'install', '--upgrade', 'pip'])
       Command.Run(['pip', 'install', 'buildbot-worker'])
+      if platform.system() == 'Windows':
+        Command.Run(['pip', 'install', 'pypiwin32'])
     finally:
       os.chdir(prev_cwd)
 
