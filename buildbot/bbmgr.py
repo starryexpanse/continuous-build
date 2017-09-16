@@ -252,6 +252,6 @@ if __name__ == '__main__':
       BuildbotManager.CreateWorker(options)
     BuildbotManager.StartWorker(options)
   elif options.command == 'worker-stop':
-    BuildbotManager.StartWorker(options)
+    BuildbotManager.StopWorker(options)
   else:
     assert False
