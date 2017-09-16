@@ -105,6 +105,7 @@ class Options(object):
     cp.add_argument('password', help='The worker password.')
     wsub.add_parser('start', help='Start the local worker.')
     wsub.add_parser('stop', help='Stop the local worker.')
+    wsub.add_parser('prereqs', help='Install worker prerequisites.')
 
     args = parser.parse_args()
     if not args.cmd:
@@ -233,6 +234,8 @@ if __name__ == '__main__':
     BuildbotManager.RestartMaster(options)
   elif options.command == 'master-reset-db':
     BuildbotManager.ResetMasterDatabase(options)
+  elif options.command == 'worker-prereqs':
+    BuildbotManager.InstallWorkerPrereqs(options)
   elif options.command == 'worker-create':
     BuildbotManager.InstallWorkerPrereqs(options)
     BuildbotManager.CreateWorker(options)
