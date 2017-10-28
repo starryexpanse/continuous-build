@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Get/Update Source') {
             steps {
-                // https://jenkins.io/doc/pipeline/steps/slack/
-                slackSend channel: "#build", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+                mattermostSend color: '#888888', message: "Started ${env.JOB_NAME} build ${env.BUILD_NUMBER}..."
                 checkout poll: true, scm: [$class: 'SubversionSCM',
                     additionalCredentials: [],
                     excludedCommitMessages: '',
@@ -20,7 +19,7 @@ pipeline {
                         depthOption: 'infinity',
                         ignoreExternalsOption: true,
                         local: '.',
-                        remote: 'svn://chris@10.0.9.57/starryexpanse']],
+                        remote: 'svn://chris@10.0.9.109/starryexpanse']],
                     workspaceUpdater: [$class: 'UpdateUpdater']]
                 checkout poll: true, scm: [$class: 'GitSCM',
                     branches: [[name: '*/master']],
@@ -68,14 +67,14 @@ pipeline {
         }
         success {
             echo 'I succeeded!'
-            slackSend channel: "#build", color: "#00AA00", message: "Build succeeded: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            mattermostSend color: 'good', message: "${env.JOB_NAME} build ${env.BUILD_NUMBER} succeeded. :tada:"
         }
         unstable {
             echo 'I am unstable :/'
         }
         failure {
             echo 'I failed :('
-            slackSend channel: "#build", color: "#FF0000", message: "Build *FAILED*: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            mattermostSend color: 'danger', message: "${env.JOB_NAME} build ${env.BUILD_NUMBER} **FAILED**! :confounded:"
         }
         changed {
             echo 'Things were different before...'
