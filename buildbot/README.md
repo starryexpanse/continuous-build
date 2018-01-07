@@ -81,3 +81,9 @@ After any change to `master.cfg` it recommended to validate that file as so:
 ```bash
 python bbmgr.py master checkconfig
 ```
+
+## Upgrading Python packages
+
+```bash
+python bbmgr.py venv upgrade
+```

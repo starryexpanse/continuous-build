@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import argparse
 import os
+import pip
 import platform
 import shutil
 import socket
@@ -70,6 +71,14 @@ class VirtualEnv(object):
     print('And then rerun this script.')
     sys.exit(0)
 
+  @staticmethod
+  def UpgradeAllPythonPackages():
+    if not VirtualEnv.Get():
+      print("No virtualenv", file=sys.stderr)
+      sys.exit(1)
+    packages = [dist.project_name for dist in pip.get_installed_distributions()]
+    subprocess.call("pip install --upgrade " + ' '.join(packages), shell=True)
+
 class Options(object):
   def __init__(self):
     self.command = None
@@ -112,6 +121,12 @@ class Options(object):
     wsub.add_parser('stop', help='Stop the local worker.')
     wsub.add_parser('prereqs', help='Install worker prerequisites.')
 
+    # create the parser for the "pip" command
+    parser_venv = top_subparsers.add_parser(
+        'venv', help='Manage virtual Python environment.')
+    vsub = parser_venv.add_subparsers(dest='sub_cmd')
+    vsub.add_parser('upgrade', help='Upgrade all install pip packages.')
+
     args = parser.parse_args()
     if not args.cmd:
       parser.print_help()
@@ -121,6 +136,8 @@ class Options(object):
         parser_master.print_help()
       elif args.cmd == 'worker':
         parser_worker.print_help()
+      elif args.cmd == 'venv':
+        parser_venv.print_help()
       sys.exit(1)
     self.command = '%s-%s' % (args.cmd, args.sub_cmd)
     if self.command == 'worker-create':
@@ -253,5 +270,7 @@ if __name__ == '__main__':
     BuildbotManager.StartWorker(options)
   elif options.command == 'worker-stop':
     BuildbotManager.StopWorker(options)
+  elif options.command == 'venv-upgrade':
+    VirtualEnv.UpgradeAllPythonPackages()
   else:
     assert False
