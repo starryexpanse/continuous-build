@@ -10,6 +10,7 @@ import shutil
 import socket
 import subprocess
 import sys
+from pip._internal.utils.misc import get_installed_distributions
 
 class bcolors:
     HEADER = '\033[95m'
@@ -76,7 +77,7 @@ class VirtualEnv(object):
     if not VirtualEnv.Get():
       print("No virtualenv", file=sys.stderr)
       sys.exit(1)
-    packages = [dist.project_name for dist in pip.get_installed_distributions()]
+    packages = [dist.project_name for dist in get_installed_distributions()]
     subprocess.call("pip install --upgrade " + ' '.join(packages), shell=True)
 
 class Options(object):
