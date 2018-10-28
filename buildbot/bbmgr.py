@@ -212,7 +212,7 @@ class BuildbotManager(object):
       Command.Run(['pip', 'install', '--upgrade', 'pip'])
       Command.Run(['pip', 'install', 'buildbot-worker'])
       if platform.system() == 'Windows':
-        Command.Run(['pip', 'install', 'pypiwin32'])
+        Command.Run(['pip', 'install', 'pypiwin32', 'pyyaml'])
     finally:
       os.chdir(prev_cwd)
 
